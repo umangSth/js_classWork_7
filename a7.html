@@ -14,31 +14,54 @@
 			return document.getElementById(id)
 		}
 		
-
 		let noOfRows = $("t1")
 		let noOfCols = $("t2")
-
+		let currentCols = 0
 
 		let generateTable = function(){
 			createTable(parseInt(noOfRows.value), parseInt(noOfCols.value))
+			currentCols = parseInt(noOfCols.value)
 		}
 		
+		function addColumn() {
+			let tb = $("myTable");
+			currentCols++; 
+			for (let row = 0; row < tb.rows.length; row++) {
+			let c = tb.rows[row].insertCell(currentCols - 1); // Add a new cell to each row
+			c.style.border = "1px solid black";
+			c.style.width = "50px";
+			c.style.height = "50px";
+			}
+		}
+		function addRow(){
+			let tb = $("myTable")
+			let r = tb.insertRow(tb.rows.length)
+			for (let col = 0; col < currentCols; col++) {
+				let c = r.insertCell(col);
+				c.style.border = "1px solid black";
+				c.style.width = "50px";
+				c.style.height = "50px";
+				}
+			}
+
+
 		function createTable(rows, cols){
-			console.log(rows, cols)
+			let tb = $("myTable")
+			if (tb){
+				tb.remove()
+			}
 			let a = document.createElement("TABLE")
 			a.setAttribute("id", "myTable")
-			a.style.width = "250px"
-			a.style.height = "250px"
 			a.style.border = "1px solid black"
 			a.style.marginTop = "50px"
-			document.body.appendChild(a)
-			
+			document.body.appendChild(a)			
 			for (let row = 0; row<rows; row++){
 				let r = $("myTable").insertRow(row)
 				for (let col= 0; col<cols; col++){
 					let c = r.insertCell(col);
-					
 					c.style.border = "1px solid black"
+					c.style.width = "50px"
+					c.style.height = "50px"
 				}
 			}
 		}
