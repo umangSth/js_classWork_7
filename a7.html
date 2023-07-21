@@ -25,13 +25,20 @@
 		
 		function createTable(rows, cols){
 			console.log(rows, cols)
-			let a = document.createElement("Table")
+			let a = document.createElement("TABLE")
 			a.setAttribute("id", "myTable")
+			a.style.width = "250px"
+			a.style.height = "250px"
+			a.style.border = "1px solid black"
+			a.style.marginTop = "50px"
 			document.body.appendChild(a)
+			
 			for (let row = 0; row<rows; row++){
-				let b = $("myTable").insertRow(row)
+				let r = $("myTable").insertRow(row)
 				for (let col= 0; col<cols; col++){
-					let c = b.insertCell(col);
+					let c = r.insertCell(col);
+					
+					c.style.border = "1px solid black"
 				}
 			}
 		}
