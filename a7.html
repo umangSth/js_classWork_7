@@ -1,3 +1,4 @@
+<!--Student Name: Umanga Shrestha, ID: C0882758-->
 <html>
   <head>
     <font size="8" color="green">Final test lab</font>
@@ -18,7 +19,6 @@
         return document.getElementById(id);
       };
 
-      // variable
       let noOfRows = $("t1");
       let noOfCols = $("t2");
       let currentCols = 0;
@@ -30,6 +30,17 @@
         if (rows > 0 && cols > 0) {
           createTable(rows, cols);
           currentCols = cols;
+          $("t1").style.display = "none";
+          $("t2").style.display = "none";
+          $("b1").style.display = "none";
+          document.querySelector('body').childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+              const text = node.textContent.trim();
+              if (text === "Number of rows:" || text === "Number of cols:") {
+                node.textContent = "";
+              }
+            }
+          });
         } else {
           noOfRows.value = '';
           noOfCols.value = '';
@@ -59,10 +70,6 @@
       }
 
       function createTable(rows, cols) {
-        let tb = $("myTable");
-        if (tb) {
-          tb.remove();
-        }
         let a = document.createElement("TABLE");
         a.setAttribute("id", "myTable");
         a.style.border = "1px solid black";
