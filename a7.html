@@ -1,72 +1,93 @@
 <html>
-	<font size="8" color="green">Final test lab</font><br><br>
-	Number of rows: <input type="text" id="t1" /><br><br>
-	Number of cols: <input type="text" id="t2" /><br><br>
-	
-	<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
-	
-	<button id="b2" onclick="addColumn()">Add Column</button>
-	
-	<button id="b3" onclick="addRow()">Add Row</button>
-		
-	<script language="javascript">
-		let $ = function (id){
-			return document.getElementById(id)
-		}
-		
-		let noOfRows = $("t1")
-		let noOfCols = $("t2")
-		let currentCols = 0
+  <head>
+    <font size="8" color="green">Final test lab</font>
+  </head>
+  <body>
+    <br /><br />
+    Number of rows: <input type="text" id="t1" /><br /><br />
+    Number of cols: <input type="text" id="t2" /><br /><br />
 
-		let generateTable = function(){
-			createTable(parseInt(noOfRows.value), parseInt(noOfCols.value))
-			currentCols = parseInt(noOfCols.value)
-		}
-		
-		function addColumn() {
-			let tb = $("myTable");
-			currentCols++; 
-			for (let row = 0; row < tb.rows.length; row++) {
-			let c = tb.rows[row].insertCell(currentCols - 1); // Add a new cell to each row
-			c.style.border = "1px solid black";
-			c.style.width = "50px";
-			c.style.height = "50px";
-			}
-		}
-		function addRow(){
-			let tb = $("myTable")
-			let r = tb.insertRow(tb.rows.length)
-			for (let col = 0; col < currentCols; col++) {
-				let c = r.insertCell(col);
-				c.style.border = "1px solid black";
-				c.style.width = "50px";
-				c.style.height = "50px";
-				}
-			}
+    <button id="b1" onclick="generateTable()">Generate Table</button><br /><br />
 
+    <button id="b2" onclick="addColumn()">Add Column</button>
 
-		function createTable(rows, cols){
-			let tb = $("myTable")
-			if (tb){
-				tb.remove()
-			}
-			let a = document.createElement("TABLE")
-			a.setAttribute("id", "myTable")
-			a.style.border = "1px solid black"
-			a.style.marginTop = "50px"
-			document.body.appendChild(a)			
-			for (let row = 0; row<rows; row++){
-				let r = $("myTable").insertRow(row)
-				for (let col= 0; col<cols; col++){
-					let c = r.insertCell(col);
-					c.style.border = "1px solid black"
-					c.style.width = "50px"
-					c.style.height = "50px"
-				}
-			}
-		}
-		
-	
-	</script>
-	
+    <button id="b3" onclick="addRow()">Add Row</button>
+
+    <script language="javascript">
+      let $ = function (id) {
+        return document.getElementById(id);
+      };
+
+      // variable
+      let noOfRows = $("t1");
+      let noOfCols = $("t2");
+      let currentCols = 0;
+
+      let generateTable = function () {
+        let rows = chkNum(noOfRows.value);
+        let cols = chkNum(noOfCols.value);
+
+        if (rows > 0 && cols > 0) {
+          createTable(rows, cols);
+          currentCols = cols;
+        } else {
+          noOfRows.value = '';
+          noOfCols.value = '';
+          alert("Incorrect data type");
+        }
+      };
+
+      function addColumn() {
+        let tb = $("myTable");
+        currentCols++;
+        for (let row = 0; row < tb.rows.length; row++) {
+          let c = tb.rows[row].insertCell(currentCols - 1); 
+          c.style.border = "1px solid black";
+          c.style.width = "50px";
+          c.style.height = "50px";
+        }
+      }
+      function addRow() {
+        let tb = $("myTable");
+        let r = tb.insertRow(tb.rows.length);
+        for (let col = 0; col < currentCols; col++) {
+          let c = r.insertCell(col);
+          c.style.border = "1px solid black";
+          c.style.width = "50px";
+          c.style.height = "50px";
+        }
+      }
+
+      function createTable(rows, cols) {
+        let tb = $("myTable");
+        if (tb) {
+          tb.remove();
+        }
+        let a = document.createElement("TABLE");
+        a.setAttribute("id", "myTable");
+        a.style.border = "1px solid black";
+        a.style.marginTop = "50px";
+        document.body.appendChild(a);
+        for (let row = 0; row < rows; row++) {
+          let r = $("myTable").insertRow(row);
+          for (let col = 0; col < cols; col++) {
+            let c = r.insertCell(col);
+            c.style.border = "1px solid black";
+            c.style.width = "50px";
+            c.style.height = "50px";
+          }
+        }
+      }
+
+      function chkNum(value) {
+        let num = parseInt(value);
+        console.log(num);
+        if (isNaN(num)) {
+          return 0; 
+        } else {
+          return num;
+        }
+      }
+    </script>
+  </body>
 </html>
